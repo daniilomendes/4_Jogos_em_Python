@@ -1,5 +1,4 @@
-# Projeto 3 - Chute o número
-# Criar um algorítimo que gera um valor aleatório e o jogador deve advinhar qual número é
+# Projeto 4 - Criar interface para o chute um número
 
 import random
 
@@ -12,6 +11,10 @@ class ChuteONumero:
         self.tentar_novamente = True
 
     def Iniciar(self):
+        # Layout
+        # Criar janela
+        # Receber os valores
+        # Trabalhar com estes números
         self.GerarNumeroAleatorio()
         self.PedirValorAleatorio()
         try:
