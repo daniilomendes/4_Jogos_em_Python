@@ -3,6 +3,7 @@
 import random
 import PySimpleGUI as sg
 
+
 class ChuteONumero:
     def __init__(self):
         self.valor_aleatorio = 0
@@ -12,38 +13,36 @@ class ChuteONumero:
 
     def Iniciar(self):
         # Layout
-        layout = [
-            [sg.Text('Seu Chute', size=(20, 0))],
+        self.layout = [
+            [sg.Text('Seu Chute', size=(39, 0))],
             [sg.Input(size=(18, 0), key='ValorChute')],
-            [sg.Output(size=(20, 10))]
+            [sg.Button('Chutar!')],
+            [sg.Output(size=(39, 10))]
         ]
         # Criar janela
-        self.janela = sg.Window('Chute o número!')
-
+        self.janela = sg.Window('Chute o número!', layout=self.layout)
         self.GerarNumeroAleatorio()
-        self.PedirValorAleatorio()
         try:
             while True:
                 # Receber os valores
                 self.evento, self.valores = self.janela.Read()
-                self.valor_chute = self.valores['ValorChute']
                 # Trabalhar com estes números
-                while self.tentar_novamente == True:
-                    if int(self.valor_chute) > self.valor_aleatorio:
-                        print('Chute um valor MAIS BAIXO!')
-                        self.PedirValorAleatorio()
-                    elif int(self.valor_chute) < self.valor_aleatorio:
-                        print('Chute um valor MAIS ALTO!')
-                        self.PedirValorAleatorio()
-                    if int(self.valor_chute) == self.valor_aleatorio:
-                        self.tentar_novamente = False
-                        print('Parabéns, Você acertou!')
+                if self.evento == 'Chutar!':
+                    self.valor_chute = self.valores['ValorChute']
+                    while self.tentar_novamente == True:
+                        if int(self.valor_chute) > self.__valor_aleatorio:
+                            print('Chute um valor MAIS BAIXO!')
+                            break
+                        elif int(self.valor_chute) < self.valor_aleatorio:
+                            print('Chute um valor MAIS ALTO!')
+                            break
+                        if int(self.valor_chute) == self.valor_aleatorio:
+                            self.tentar_novamente = False
+                            print('Parabéns, Você acertou!')
+                            break
         except:
             print('Por favor, digitar apenas números inteiros!')
             self.Iniciar()
-
-    def PedirValorAleatorio(self):
-        self.valor_chute = input('Chute um número: ')
 
     def GerarNumeroAleatorio(self):
         self.valor_aleatorio = random.randint(self.valor_minimo, self.valor_maximo)

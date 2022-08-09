@@ -24,7 +24,6 @@ class SimuladorDeDado:
         # Ler os valores da tela
         self.eventos, self.valores = self.janela.Read()
         # Fazer uso dos valores
-
         try:
             if self.eventos == 'sim':
                 self.GerarValorDoDado()
