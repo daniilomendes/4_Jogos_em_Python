@@ -1,7 +1,7 @@
-# Projeto 1 - Simulador de dados
-# Simular o uso de um dado, gerando um valor de 1 até 6
+# Projeto 2 - Criar interface para o simulador de dados
 
 import random
+import PySimpleGUI as sg
 
 
 class SimuladorDeDado:
@@ -10,12 +10,22 @@ class SimuladorDeDado:
         self.valor_maximo = 6
         self.mensagem = 'Você gostaria de gerar um novo valor para o dado? '
 
+        # Layout
+        self.layout = [
+            [sg.Text('Jogar o Dado?')],
+            [sg.Button('sim'), sg.Button('não')]
+        ]
+
     def Iniciar(self):
-        resposta = input(self.mensagem)
+        # Criar uma janela
+        self.janela = sg.Window('Simulador de Dado', layout=self.layout)
+        # Ler os valores da tela
+        self.eventos, self.valores = self.janela.Read()
+        # Fazer uso dos valores
         try:
-            if resposta == 'sim' or resposta == 's':
+            if self.eventos == 'sim':
                 self.GerarValorDoDado()
-            elif resposta == 'não' or resposta == 'n':
+            elif self.eventos == 'não':
                 print('Agradecemos sua participação')
             else:
                 print('Por favor, digitar sim ou não.')
